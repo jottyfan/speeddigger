@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "speeddigger",
+  "name": "Speed Digger",
+  "description": "dig faster than usual",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["jottyfan"],
+  "credits": "quess what",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
