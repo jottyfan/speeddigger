@@ -1,8 +1,10 @@
 package de.jottyfan.minecraft.speeddigger;
 
+import de.jottyfan.minecraft.speeddigger.event.BlockBreakEvent;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -34,5 +36,6 @@ public class SpeedDigger {
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.AXE_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.AXE_GUNPOWDER), "## ", "#| ", " | ", '#', Items.GUNPOWDER, '|',
 				Items.STICK);
+		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
 	}
 }

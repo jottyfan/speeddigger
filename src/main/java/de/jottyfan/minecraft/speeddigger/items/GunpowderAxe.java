@@ -6,6 +6,7 @@ import com.google.common.collect.Sets;
 
 import de.jottyfan.minecraft.speeddigger.SpeedDigger;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemTool;
@@ -21,6 +22,8 @@ public class GunpowderAxe extends ItemTool {
 			Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK,
 			Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE });
 
+	private static final Set<Block> EFFECTIVE_RECURSIVE_ON = Sets.newHashSet(new Block[] { Blocks.LOG, Blocks.LOG2 });
+
 	public GunpowderAxe(CreativeTabs tabs) {
 		super(ToolMaterial.WOOD, EFFECTIVE_ON);
 		this.attackDamage = 2;
@@ -28,5 +31,10 @@ public class GunpowderAxe extends ItemTool {
 		super.setRegistryName(SpeedDigger.MODID, "gunpowderaxe");
 		super.setUnlocalizedName("gunpowderaxe");
 		super.setCreativeTab(tabs);
+	}
+
+	@Override
+	public boolean canHarvestBlock(IBlockState blockIn) {
+		return EFFECTIVE_RECURSIVE_ON.contains(blockIn.getBlock());
 	}
 }
