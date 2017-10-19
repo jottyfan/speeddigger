@@ -22,7 +22,7 @@ public class SpeedDiggerTabs extends CreativeTabs {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getTabIconItem() {
 		StringBuilder buf = new StringBuilder(SpeedDigger.MODID);
-		buf.append(":").append("speeddiggericon");
+		buf.append(":").append("gunpowderaxe");
 		Item item = Item.getByNameOrId(buf.toString());
 		return new ItemStack(item);
 	}
