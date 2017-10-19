@@ -2,7 +2,6 @@ package de.jottyfan.minecraft.speeddigger;
 
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -23,7 +22,6 @@ public class SpeedDigger {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		GameRegistry.findRegistry(Item.class).register(SpeedDiggerItems.AXE_GUNPOWDER);
 	}
 
 	@EventHandler

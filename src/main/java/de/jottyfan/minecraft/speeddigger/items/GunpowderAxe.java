@@ -23,7 +23,7 @@ public class GunpowderAxe extends ItemTool {
 
 	public GunpowderAxe(CreativeTabs tabs) {
 		super(ToolMaterial.WOOD, EFFECTIVE_ON);
-		this.attackDamage = 10;
+		this.attackDamage = 2;
 		this.attackSpeed = 0.7f;
 		super.setRegistryName(SpeedDigger.MODID, "gunpowderaxe");
 		super.setUnlocalizedName("gunpowderaxe");
