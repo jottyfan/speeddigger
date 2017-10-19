@@ -4,6 +4,7 @@ import de.jottyfan.minecraft.speeddigger.help.SpeedDiggerTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
@@ -21,9 +22,14 @@ public class SpeedDigger {
 		SpeedDiggerTabs tabs = new SpeedDiggerTabs();
 		// TODO: to be set on created items
 	}
+	
+	@EventHandler
+	public void load(FMLPostInitializationEvent event) {
+		// TODO
+	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
+		// TODO
 	}
 }
