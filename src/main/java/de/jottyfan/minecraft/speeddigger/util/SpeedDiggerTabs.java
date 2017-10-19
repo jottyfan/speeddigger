@@ -1,4 +1,4 @@
-package de.jottyfan.minecraft.speeddigger.help;
+package de.jottyfan.minecraft.speeddigger.util;
 
 import de.jottyfan.minecraft.speeddigger.SpeedDigger;
 import net.minecraft.creativetab.CreativeTabs;
