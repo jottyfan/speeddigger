@@ -1,7 +1,8 @@
 {	"homepage": "https://github.com/jottyfan/speeddigger/blob/master/update.json",
-	"1.12.2": { "1.12.2.0": "basic mod definition" 
+	"1.12.2": { "1.12.2.0": "basic mod definition",
+              "1.12.2.1": "biomesoplenty and mushrooms"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.0",
-	            "1.12.2-recommended": "1.12.2.0" 
+	"promos": { "1.12.2-latest": "1.12.2.1",
+	            "1.12.2-recommended": "1.12.2.1" 
 	          }
 }
