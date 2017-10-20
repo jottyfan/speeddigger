@@ -22,7 +22,7 @@ public class GunpowderAxe extends ItemTool {
 			Blocks.LOG, Blocks.LOG2, Blocks.CHEST, Blocks.PUMPKIN, Blocks.LIT_PUMPKIN, Blocks.MELON_BLOCK,
 			Blocks.LADDER, Blocks.WOODEN_BUTTON, Blocks.WOODEN_PRESSURE_PLATE });
 
-	private static final Set<Block> EFFECTIVE_RECURSIVE_ON = Sets.newHashSet(new Block[] { Blocks.LOG, Blocks.LOG2 });
+	private static final Set<Block> EFFECTIVE_RECURSIVE_ON = Sets.newHashSet(new Block[] { Blocks.LOG, Blocks.LOG2, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK });
 
 	public GunpowderAxe(CreativeTabs tabs) {
 		super(ToolMaterial.WOOD, EFFECTIVE_ON);
@@ -35,6 +35,7 @@ public class GunpowderAxe extends ItemTool {
 
 	@Override
 	public boolean canHarvestBlock(IBlockState blockIn) {
-		return EFFECTIVE_RECURSIVE_ON.contains(blockIn.getBlock());
+		// second one is for biomesoplenty
+		return EFFECTIVE_RECURSIVE_ON.contains(blockIn.getBlock()) || blockIn.getBlock().getUnlocalizedName().startsWith("tile.log_");
 	}
 }
