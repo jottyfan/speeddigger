@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = SpeedDigger.MODID, version = SpeedDigger.VERSION)
 public class SpeedDigger {
 	public static final String MODID = "speeddigger";
-	public static final String VERSION = "1.12.2.1";
+	public static final String VERSION = "1.12.2.2";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -35,6 +35,12 @@ public class SpeedDigger {
 	public void init(FMLInitializationEvent event) {
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.AXE_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.AXE_GUNPOWDER), "## ", "#| ", " | ", '#', Items.GUNPOWDER, '|',
+				Items.STICK);
+		GameRegistry.addShapedRecipe(SpeedDiggerItems.PICKAXE_GUNPOWDER.getRegistryName(), null,
+				new ItemStack(SpeedDiggerItems.PICKAXE_GUNPOWDER), "###", " | ", " | ", '#', Items.GUNPOWDER, '|',
+				Items.STICK);
+		GameRegistry.addShapedRecipe(SpeedDiggerItems.SHOVEL_GUNPOWDER.getRegistryName(), null,
+				new ItemStack(SpeedDiggerItems.SHOVEL_GUNPOWDER), " # ", " | ", " | ", '#', Items.GUNPOWDER, '|',
 				Items.STICK);
 		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
 	}

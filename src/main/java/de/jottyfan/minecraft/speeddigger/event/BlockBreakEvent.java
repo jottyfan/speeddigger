@@ -3,6 +3,7 @@ package de.jottyfan.minecraft.speeddigger.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.jottyfan.minecraft.speeddigger.items.RangeableTool;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,7 +14,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -35,8 +35,18 @@ public class BlockBreakEvent {
 			IBlockState blockState = world.getBlockState(event.getPos());
 			Block block = blockState.getBlock();
 			List<String> visitedBlocks = new ArrayList<>();
-			if (item != null && item.equals(SpeedDiggerItems.AXE_GUNPOWDER)) {
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, 99, BlockBreakDirection.UPWARDS);
+			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item)) {
+				RangeableTool tool = (RangeableTool) item;
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+						BlockBreakDirection.UPWARDS);
+			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)) {
+				RangeableTool tool = (RangeableTool) item;
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+						BlockBreakDirection.ALL);
+			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)) {
+				RangeableTool tool = (RangeableTool) item;
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+						BlockBreakDirection.ALL);
 			}
 		}
 	}
