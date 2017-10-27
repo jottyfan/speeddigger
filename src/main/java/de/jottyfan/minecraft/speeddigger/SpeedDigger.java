@@ -1,5 +1,6 @@
 package de.jottyfan.minecraft.speeddigger;
 
+import de.jottyfan.minecraft.speeddigger.event.AutoSaplingEvent;
 import de.jottyfan.minecraft.speeddigger.event.BlockBreakEvent;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
 import net.minecraft.init.Items;
@@ -20,7 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = SpeedDigger.MODID, version = SpeedDigger.VERSION)
 public class SpeedDigger {
 	public static final String MODID = "speeddigger";
-	public static final String VERSION = "1.12.2.2";
+	public static final String VERSION = "1.12.2.3";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -28,7 +29,7 @@ public class SpeedDigger {
 
 	@EventHandler
 	public void load(FMLPostInitializationEvent event) {
-		// TODO
+		MinecraftForge.EVENT_BUS.register(new AutoSaplingEvent());
 	}
 
 	@EventHandler
