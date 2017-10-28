@@ -23,9 +23,11 @@ import scala.collection.mutable.HashSet;
  */
 @ObjectHolder(SpeedDigger.MODID)
 public class SpeedDiggerItems {
-	public static final GunpowderAxe AXE_GUNPOWDER = new GunpowderAxe(new SpeedDiggerTabs());
-	public static final GunpowderPickaxe PICKAXE_GUNPOWDER = new GunpowderPickaxe(new SpeedDiggerTabs());
-	public static final GunpowderShovel SHOVEL_GUNPOWDER = new GunpowderShovel(new SpeedDiggerTabs());
+	private static final SpeedDiggerTabs tabs = new SpeedDiggerTabs(SpeedDigger.MODID, "gunpowderaxe");
+	
+	public static final GunpowderAxe AXE_GUNPOWDER = new GunpowderAxe(tabs);
+	public static final GunpowderPickaxe PICKAXE_GUNPOWDER = new GunpowderPickaxe(tabs);
+	public static final GunpowderShovel SHOVEL_GUNPOWDER = new GunpowderShovel(tabs);
 
 	@SideOnly(Side.CLIENT)
 	@Mod.EventBusSubscriber(modid = SpeedDigger.MODID)

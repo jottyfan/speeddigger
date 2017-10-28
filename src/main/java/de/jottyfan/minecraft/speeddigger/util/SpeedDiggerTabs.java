@@ -14,15 +14,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class SpeedDiggerTabs extends CreativeTabs {
 	
-	public SpeedDiggerTabs() {
+	private final String modId;
+	private final String iconname;
+	
+	public SpeedDiggerTabs(String modId, String iconname) {
 		super(SpeedDigger.MODID);
+		this.modId = modId;
+		this.iconname = iconname;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getTabIconItem() {
-		StringBuilder buf = new StringBuilder(SpeedDigger.MODID);
-		buf.append(":").append("gunpowderaxe");
+		StringBuilder buf = new StringBuilder(modId);
+		buf.append(":").append(iconname);
 		Item item = Item.getByNameOrId(buf.toString());
 		return new ItemStack(item);
 	}
