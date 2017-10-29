@@ -5,6 +5,7 @@ import de.jottyfan.minecraft.speeddigger.event.BlockBreakEvent;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -43,6 +44,9 @@ public class SpeedDigger {
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.SHOVEL_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.SHOVEL_GUNPOWDER), " # ", " | ", " | ", '#', Items.GUNPOWDER, '|',
 				Items.STICK);
+		GameRegistry.addShapelessRecipe(Items.GUNPOWDER.getRegistryName(), null, new ItemStack(Items.GUNPOWDER, 4),
+				Ingredient.fromItem(SpeedDiggerItems.ITEM_SULPHOR), Ingredient.fromItem(SpeedDiggerItems.ITEM_SALPETER),
+				Ingredient.fromItem(Items.COAL));
 		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
 	}
 }

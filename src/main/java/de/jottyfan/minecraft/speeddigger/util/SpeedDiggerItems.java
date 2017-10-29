@@ -4,6 +4,8 @@ import de.jottyfan.minecraft.speeddigger.SpeedDigger;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderAxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderPickaxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderShovel;
+import de.jottyfan.minecraft.speeddigger.items.Salpeter;
+import de.jottyfan.minecraft.speeddigger.items.Sulphor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -28,6 +30,9 @@ public class SpeedDiggerItems {
 	public static final GunpowderAxe AXE_GUNPOWDER = new GunpowderAxe(tabs);
 	public static final GunpowderPickaxe PICKAXE_GUNPOWDER = new GunpowderPickaxe(tabs);
 	public static final GunpowderShovel SHOVEL_GUNPOWDER = new GunpowderShovel(tabs);
+	
+	public static final Sulphor ITEM_SULPHOR = new Sulphor(tabs);
+	public static final Salpeter ITEM_SALPETER = new Salpeter(tabs);
 
 	@SideOnly(Side.CLIENT)
 	@Mod.EventBusSubscriber(modid = SpeedDigger.MODID)
@@ -36,7 +41,7 @@ public class SpeedDiggerItems {
 
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
-			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER };
+			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER, ITEM_SULPHOR, ITEM_SALPETER };
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 
