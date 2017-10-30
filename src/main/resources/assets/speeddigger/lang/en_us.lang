@@ -1,6 +1,10 @@
 item.gunpowderaxe.name=gunpowder axe
 item.gunpowderpickaxe.name=gunpowder pickaxe
 item.gunpowdershovel.name=gunpowder shovel
-item.sulphor.name=Sulphor
-item.salpeter.name=Salpeter
+item.sulphor.name=sulphor
+item.salpeter.name=salpeter
+tile.orenethersulphor.name=nether sulphor
+tile.oresalpeter.name=salpeter ore
+tile.oresandsalpeter.name=salpeter stone
+tile.oresulphor.name=sulphor stone
 itemGroup.speeddigger=Speed Digger

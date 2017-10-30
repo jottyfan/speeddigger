@@ -2,9 +2,10 @@
 	"1.12.2": { "1.12.2.0": "basic mod definition",
               "1.12.2.1": "biomesoplenty and mushrooms",
               "1.12.2.2": "gunpowder pickaxe and shovel",
-              "1.12.2.2": "auto sapling"
+              "1.12.2.3": "auto sapling",
+              "1.12.2.4": "sulphor and salpeter"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.3",
-	            "1.12.2-recommended": "1.12.2.3" 
+	"promos": { "1.12.2-latest": "1.12.2.4",
+	            "1.12.2-recommended": "1.12.2.4" 
 	          }
 }

@@ -3,6 +3,7 @@ package de.jottyfan.minecraft.speeddigger;
 import de.jottyfan.minecraft.speeddigger.event.AutoSaplingEvent;
 import de.jottyfan.minecraft.speeddigger.event.BlockBreakEvent;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
+import de.jottyfan.minecraft.speeddigger.world.OreGenerator;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -22,7 +23,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = SpeedDigger.MODID, version = SpeedDigger.VERSION)
 public class SpeedDigger {
 	public static final String MODID = "speeddigger";
-	public static final String VERSION = "1.12.2.3";
+	public static final String VERSION = "1.12.2.4";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -48,5 +49,6 @@ public class SpeedDigger {
 				Ingredient.fromItem(SpeedDiggerItems.ITEM_SULPHOR), Ingredient.fromItem(SpeedDiggerItems.ITEM_SALPETER),
 				Ingredient.fromItem(Items.COAL));
 		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
+		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 	}
 }
