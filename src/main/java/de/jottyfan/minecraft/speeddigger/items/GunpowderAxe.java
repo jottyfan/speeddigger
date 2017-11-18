@@ -24,11 +24,8 @@ public class GunpowderAxe extends ItemTool implements RangeableTool {
 
 	private static final Set<Block> EFFECTIVE_RECURSIVE_ON = Sets.newHashSet(new Block[] { Blocks.LOG, Blocks.LOG2, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.RED_MUSHROOM_BLOCK });
 
-	private Integer range;
-	
 	public GunpowderAxe(CreativeTabs tabs) {
 		super(ToolMaterial.WOOD, EFFECTIVE_ON);
-		this.range = 99;
 		this.attackDamage = 2;
 		this.attackSpeed = 0.7f;
 		super.setRegistryName(SpeedDigger.MODID, "gunpowderaxe");
@@ -38,7 +35,7 @@ public class GunpowderAxe extends ItemTool implements RangeableTool {
 	
 	@Override
 	public Integer getRange() {
-		return range;	
+		return null; // no limit	
 	}
 
 	@Override

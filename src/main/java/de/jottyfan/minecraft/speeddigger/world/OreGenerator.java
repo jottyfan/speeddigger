@@ -46,7 +46,7 @@ public class OreGenerator implements IWorldGenerator {
 	 */
 	private void generateNetherOres(World world, Random random, int chunkX, int chunkZ, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, chunkX, chunkZ, 3, 3, 18, 15, 5, 250, null,
+		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, chunkX, chunkZ, 3, 3, 18, 15, 5, 250,
 				Blocks.NETHERRACK);
 	}
 
@@ -62,14 +62,11 @@ public class OreGenerator implements IWorldGenerator {
 	 */
 	private void generateOverworldOres(World world, Random random, int chunkX, int chunkZ,
 			IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 1, 1, 3, 90, 5, 250, Blocks.LAVA,
-				Blocks.STONE);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 1, 1, 3, 90, 48, 250, Blocks.STONE,
-				Blocks.STONE);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 90, 32, 250, null,
-				Blocks.STONE);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 90, 32, 250, null,
-				Blocks.SANDSTONE);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 1, 1, 3, 20, 5, 250, Blocks.LAVA);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 1, 1, 3, 90, 5, 250, Blocks.STONE, Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 90, 5, 250, Blocks.STONE, Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 90, 5, 250,
+				Blocks.SANDSTONE, Blocks.SAND);
 	}
 
 	/**
@@ -89,10 +86,12 @@ public class OreGenerator implements IWorldGenerator {
 	 * @param blocksToSpawnIn
 	 */
 	private void addOreSpawn(Block ore, World world, Random random, int blockXPos, int blockZPos, int sizeX, int sizeZ,
-			int maxVeinSize, int chance, int minY, int maxY, Block neighbourBlock, Block... blocksToSpawnIn) {
+			int maxVeinSize, int chance, int minY, int maxY, Block... blocksToSpawnIn) {
 		int diced = random.nextInt(100);
+		// TODO: algorithm is too slow, find a faster way
 		if (chance > diced) {
-			int oreSrcAmount = random.nextInt(64); // for there are 256 blocks, fill at least a quarter of them in a chunk
+			// there are 256 blocks in height, fill at least a quarter of them in a chunk
+			int oreSrcAmount = random.nextInt(64);
 			for (int j = 0; j < oreSrcAmount; j++) {
 				Set<String> blockNames = new HashSet<>();
 				for (Block block : blocksToSpawnIn) {
@@ -104,41 +103,26 @@ public class OreGenerator implements IWorldGenerator {
 				int posZ = blockZPos + random.nextInt(sizeZ);
 
 				BlockPos pos = new BlockPos(posX, posY, posZ);
-				for (int i = 0; i < maxVeinSize; i++) {
+				int i = maxVeinSize;
+				while (i > 0) {
 					BlockPos posNew = pos.add(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
 					if (!posNew.equals(pos)) {
 						pos = posNew;
 						String oldBlockName = world.getBlockState(pos).getBlock().getUnlocalizedName();
-						if (neighbourBlock == null || checkNeighbour(world, pos, neighbourBlock.getUnlocalizedName())) {
-							if (blockNames.contains(oldBlockName)) {
-								world.setBlockState(pos, ore.getDefaultState(), 2);
+						if (blockNames.contains(oldBlockName)) {
+							world.setBlockState(pos, ore.getDefaultState(), 2);
+							i--;
+						} else {
+							// jump 5 blocks upwards
+							posY = posNew.getY() + 5;
+							if (posY > maxY) {
+								posY = 5; // jump back to bottom
 							}
+							pos = new BlockPos(posNew.getX(), posY, posNew.getZ());
 						}
 					}
 				}
 			}
 		}
-	}
-
-	/**
-	 * check if blocks around have one that is called unlocalizedName
-	 * 
-	 * @param world
-	 * @param pos
-	 * @param unlocalizedName
-	 * @return
-	 */
-	private boolean checkNeighbour(World world, BlockPos pos, String unlocalizedName) {
-		for (int x = pos.getX() - 1; x > pos.getX() + 1; x++) {
-			for (int y = pos.getY() - 1; y > pos.getY() + 1; y++) {
-				for (int z = pos.getZ() - 1; z < pos.getZ() + 1; z++) {
-					if (world.getBlockState(new BlockPos(x, y, z)).getBlock().getUnlocalizedName()
-							.equals(unlocalizedName)) {
-						return true; // found, abort to reduce calculation time
-					}
-				}
-			}
-		}
-		return false;
 	}
 }

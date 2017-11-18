@@ -3,9 +3,10 @@
               "1.12.2.1": "biomesoplenty and mushrooms",
               "1.12.2.2": "gunpowder pickaxe and shovel",
               "1.12.2.3": "auto sapling",
-              "1.12.2.4": "sulphor and salpeter"
+              "1.12.2.4": "sulphor and salpeter",
+              "1.12.2.5": "balancing and finetuning"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.4",
-	            "1.12.2-recommended": "1.12.2.4" 
+	"promos": { "1.12.2-latest": "1.12.2.5",
+	            "1.12.2-recommended": "1.12.2.5" 
 	          }
 }

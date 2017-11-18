@@ -60,10 +60,12 @@ public class BlockBreakEvent {
 	 * @param item
 	 * @param pos
 	 * @param radius
+	 *            to drop block; if null, no limit is given but the border of non
+	 *            equal blocks
 	 * @param blockBreakDirection
 	 */
 	private void breakBlockRecursive(List<String> visitedBlocks, World world, Block block, BlockPos pos, Item item,
-			int radius, BlockBreakDirection blockBreakDirection) {
+			Integer radius, BlockBreakDirection blockBreakDirection) {
 		if (visitedBlocks.contains(pos.toString())) {
 			return; // reduce loops
 		} else {
@@ -81,26 +83,27 @@ public class BlockBreakEvent {
 					EntityItem entity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemStack);
 					world.spawnEntity(entity);
 				}
-				if (radius > 1) {
-					breakBlockRecursive(visitedBlocks, world, block, pos.north(), item, radius - 1,
+				if (radius == null || radius > 1) {
+					Integer nextRadius = radius == null ? null : radius - 1;
+					breakBlockRecursive(visitedBlocks, world, block, pos.north(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.north().east(), item, radius - 1,
+					breakBlockRecursive(visitedBlocks, world, block, pos.north().east(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.north().west(), item, radius - 1,
+					breakBlockRecursive(visitedBlocks, world, block, pos.north().west(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south(), item, radius - 1,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south().east(), item, radius - 1,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south().east(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south().west(), item, radius - 1,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south().west(), item, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.east(), item, radius - 1, blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.west(), item, radius - 1, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.east(), item, nextRadius, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.west(), item, nextRadius, blockBreakDirection);
 
-					breakBlockRecursive(visitedBlocks, world, block, pos.up(), item, radius - 1, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.up(), item, nextRadius, blockBreakDirection);
 
 					if (BlockBreakDirection.ALL.equals(blockBreakDirection)) {
-						breakBlockRecursive(visitedBlocks, world, block, pos.down(), item, radius - 1,
+						breakBlockRecursive(visitedBlocks, world, block, pos.down(), item, nextRadius,
 								blockBreakDirection);
 					}
 				}
