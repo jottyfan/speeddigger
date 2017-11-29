@@ -27,7 +27,7 @@ import scala.collection.mutable.HashSet;
  */
 @ObjectHolder(SpeedDigger.MODID)
 public class SpeedDiggerBlocks {
-	private static final SpeedDiggerTabs tabs = new SpeedDiggerTabs(SpeedDigger.MODID, "oresulphor");
+	private static final SpeedDiggerTabs tabs = new SpeedDiggerTabs(SpeedDigger.MODID, "speedpowder");
 
 	public static final OreSulphor ORE_SULPHOR = new OreSulphor(tabs);
 	public static final OreNetherSulphor ORE_NETHER_SULPHOR = new OreNetherSulphor(tabs);

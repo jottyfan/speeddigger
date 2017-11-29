@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 @Mod(modid = SpeedDigger.MODID, version = SpeedDigger.VERSION)
 public class SpeedDigger {
 	public static final String MODID = "speeddigger";
-	public static final String VERSION = "1.12.2.5";
+	public static final String VERSION = "1.12.2.6";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -39,15 +39,26 @@ public class SpeedDigger {
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.AXE_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.AXE_GUNPOWDER), "## ", "#| ", " | ", '#', Items.GUNPOWDER, '|',
 				Items.STICK);
+		GameRegistry.addShapedRecipe(SpeedDiggerItems.AXE_SPEEDPOWDER.getRegistryName(), null,
+				new ItemStack(SpeedDiggerItems.AXE_SPEEDPOWDER), "## ", "#| ", " | ", '#', SpeedDiggerItems.ITEM_SPEEDPOWDER, '|',
+				Items.STICK);
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.PICKAXE_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.PICKAXE_GUNPOWDER), "###", " | ", " | ", '#', Items.GUNPOWDER, '|',
+				Items.STICK);
+		GameRegistry.addShapedRecipe(SpeedDiggerItems.PICKAXE_SPEEDPOWDER.getRegistryName(), null,
+				new ItemStack(SpeedDiggerItems.PICKAXE_SPEEDPOWDER), "###", " | ", " | ", '#', SpeedDiggerItems.ITEM_SPEEDPOWDER, '|',
 				Items.STICK);
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.SHOVEL_GUNPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.SHOVEL_GUNPOWDER), " # ", " | ", " | ", '#', Items.GUNPOWDER, '|',
 				Items.STICK);
-		GameRegistry.addShapelessRecipe(Items.GUNPOWDER.getRegistryName(), null, new ItemStack(Items.GUNPOWDER, 4),
+		GameRegistry.addShapedRecipe(SpeedDiggerItems.SHOVEL_SPEEDPOWDER.getRegistryName(), null,
+				new ItemStack(SpeedDiggerItems.SHOVEL_SPEEDPOWDER), " # ", " | ", " | ", '#', SpeedDiggerItems.ITEM_SPEEDPOWDER, '|',
+				Items.STICK);
+		GameRegistry.addShapelessRecipe(Items.GUNPOWDER.getRegistryName(), null, new ItemStack(Items.GUNPOWDER, 1),
 				Ingredient.fromItem(SpeedDiggerItems.ITEM_SULPHOR), Ingredient.fromItem(SpeedDiggerItems.ITEM_SALPETER),
 				Ingredient.fromItem(Items.COAL));
+		GameRegistry.addShapelessRecipe(SpeedDiggerItems.ITEM_SPEEDPOWDER.getRegistryName(), null, new ItemStack(SpeedDiggerItems.ITEM_SPEEDPOWDER, 1),
+				Ingredient.fromItem(Items.GUNPOWDER), Ingredient.fromItem(Items.REDSTONE));
 		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 	}

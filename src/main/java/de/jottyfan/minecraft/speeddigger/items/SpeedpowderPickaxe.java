@@ -17,17 +17,17 @@ import net.minecraft.item.ItemTool;
  * @author jotty
  *
  */
-public class GunpowderPickaxe extends ItemPickaxe implements RangeableTool {
+public class SpeedpowderPickaxe extends ItemPickaxe implements RangeableTool {
 
 	private Integer range;
 
-	public GunpowderPickaxe(CreativeTabs tabs) {
-		super(ToolMaterial.WOOD);
-		this.range = 3;
-		this.attackDamage = 2;
-		this.attackSpeed = 0.7f;
-		super.setRegistryName(SpeedDigger.MODID, "gunpowderpickaxe");
-		super.setUnlocalizedName("gunpowderpickaxe");
+	public SpeedpowderPickaxe(CreativeTabs tabs) {
+		super(ToolMaterial.DIAMOND);
+		this.range = 7;
+		this.attackDamage = 4;
+		this.attackSpeed = 2.0f;
+		super.setRegistryName(SpeedDigger.MODID, "speedpowderpickaxe");
+		super.setUnlocalizedName("speedpowderpickaxe");
 		super.setCreativeTab(tabs);
 	}
 

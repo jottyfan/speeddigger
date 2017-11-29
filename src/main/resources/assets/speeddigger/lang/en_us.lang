@@ -1,6 +1,10 @@
 item.gunpowderaxe.name=gunpowder axe
 item.gunpowderpickaxe.name=gunpowder pickaxe
 item.gunpowdershovel.name=gunpowder shovel
+item.speedpowderaxe.name=speedpowder axe
+item.speedpowderpickaxe.name=speedpowder pickaxe
+item.speedpowdershovel.name=speedpowder shovel
+item.speedpowder.name=speedpowder
 item.sulphor.name=sulphor
 item.salpeter.name=salpeter
 tile.orenethersulphor.name=nether sulphor

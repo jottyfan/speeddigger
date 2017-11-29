@@ -5,6 +5,10 @@ import de.jottyfan.minecraft.speeddigger.items.GunpowderAxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderPickaxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderShovel;
 import de.jottyfan.minecraft.speeddigger.items.Salpeter;
+import de.jottyfan.minecraft.speeddigger.items.Speedpowder;
+import de.jottyfan.minecraft.speeddigger.items.SpeedpowderAxe;
+import de.jottyfan.minecraft.speeddigger.items.SpeedpowderPickaxe;
+import de.jottyfan.minecraft.speeddigger.items.SpeedpowderShovel;
 import de.jottyfan.minecraft.speeddigger.items.Sulphor;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -25,12 +29,16 @@ import scala.collection.mutable.HashSet;
  */
 @ObjectHolder(SpeedDigger.MODID)
 public class SpeedDiggerItems {
-	private static final SpeedDiggerTabs tabs = new SpeedDiggerTabs(SpeedDigger.MODID, "gunpowderaxe");
-	
+	private static final SpeedDiggerTabs tabs = new SpeedDiggerTabs(SpeedDigger.MODID, "speedpowderaxe");
+
 	public static final GunpowderAxe AXE_GUNPOWDER = new GunpowderAxe(tabs);
 	public static final GunpowderPickaxe PICKAXE_GUNPOWDER = new GunpowderPickaxe(tabs);
 	public static final GunpowderShovel SHOVEL_GUNPOWDER = new GunpowderShovel(tabs);
-	
+	public static final SpeedpowderAxe AXE_SPEEDPOWDER = new SpeedpowderAxe(tabs);
+	public static final SpeedpowderPickaxe PICKAXE_SPEEDPOWDER = new SpeedpowderPickaxe(tabs);
+	public static final SpeedpowderShovel SHOVEL_SPEEDPOWDER = new SpeedpowderShovel(tabs);
+
+	public static final Speedpowder ITEM_SPEEDPOWDER = new Speedpowder(tabs);
 	public static final Sulphor ITEM_SULPHOR = new Sulphor(tabs);
 	public static final Salpeter ITEM_SALPETER = new Salpeter(tabs);
 
@@ -41,7 +49,8 @@ public class SpeedDiggerItems {
 
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
-			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER, ITEM_SULPHOR, ITEM_SALPETER };
+			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER, AXE_SPEEDPOWDER,
+					PICKAXE_SPEEDPOWDER, SHOVEL_SPEEDPOWDER, ITEM_SULPHOR, ITEM_SALPETER, ITEM_SPEEDPOWDER };
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 

@@ -46,7 +46,7 @@ public class OreGenerator implements IWorldGenerator {
 	 */
 	private void generateNetherOres(World world, Random random, int chunkX, int chunkZ, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, chunkX, chunkZ, 3, 3, 18, 15, 5, 250,
+		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, chunkX, chunkZ, 3, 3, 18, 20, 5, 250,
 				Blocks.NETHERRACK);
 	}
 
@@ -62,12 +62,12 @@ public class OreGenerator implements IWorldGenerator {
 	 */
 	private void generateOverworldOres(World world, Random random, int chunkX, int chunkZ,
 			IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 5, 5, 5, 5, 5, 250, Blocks.LAVA);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.LAVA);
 		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.STONE,
 				Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
 		addOreSpawn(SpeedDiggerBlocks.ORE_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.STONE,
 				Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 15, 5, 250,
+		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250,
 				Blocks.SANDSTONE, Blocks.SAND);
 	}
 

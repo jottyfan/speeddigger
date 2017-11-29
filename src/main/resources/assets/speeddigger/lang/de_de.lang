@@ -1,6 +1,10 @@
 item.gunpowderaxe.name=Schießpulveraxt
 item.gunpowderpickaxe.name=Schießpulverspitzhacke
 item.gunpowdershovel.name=Schießpulverschaufel
+item.speedpowderaxe.name=Fluchtpulveraxt
+item.speedpowderpickaxe.name=Fluchtpulverspitzhacke
+item.speedpowdershovel.name=Fluchtpulverschaufel
+item.speedpowder.name=Fluchtpulver
 item.sulphor.name=Schwefel
 item.salpeter.name=Salpeter
 tile.orenethersulphor.name=Nether-Schwefel

@@ -35,15 +35,17 @@ public class BlockBreakEvent {
 			IBlockState blockState = world.getBlockState(event.getPos());
 			Block block = blockState.getBlock();
 			List<String> visitedBlocks = new ArrayList<>();
-			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item)) {
+			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item) || SpeedDiggerItems.AXE_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
 						BlockBreakDirection.UPWARDS);
-			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)) {
+			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)
+					|| SpeedDiggerItems.PICKAXE_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
 						BlockBreakDirection.ALL);
-			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)) {
+			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)
+					|| SpeedDiggerItems.SHOVEL_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
 						BlockBreakDirection.ALL);

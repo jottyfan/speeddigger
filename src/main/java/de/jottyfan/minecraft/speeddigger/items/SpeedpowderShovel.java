@@ -17,20 +17,20 @@ import net.minecraft.item.ItemTool;
  * @author jotty
  *
  */
-public class GunpowderShovel extends ItemTool implements RangeableTool {
+public class SpeedpowderShovel extends ItemTool implements RangeableTool {
 
 	private static final Set<Block> EFFECTIVE_ON = Sets
 			.newHashSet(new Block[] { Blocks.GRAVEL, Blocks.SAND, Blocks.GRASS, Blocks.DIRT, Blocks.CLAY });
 
 	public Integer range;
 
-	public GunpowderShovel(CreativeTabs tabs) {
-		super(ToolMaterial.WOOD, EFFECTIVE_ON);
-		this.range = 3;
-		this.attackDamage = 2;
-		this.attackSpeed = 0.7f;
-		super.setRegistryName(SpeedDigger.MODID, "gunpowdershovel");
-		super.setUnlocalizedName("gunpowdershovel");
+	public SpeedpowderShovel(CreativeTabs tabs) {
+		super(ToolMaterial.DIAMOND, EFFECTIVE_ON);
+		this.range = 7;
+		this.attackDamage = 4;
+		this.attackSpeed = 2.0f;
+		super.setRegistryName(SpeedDigger.MODID, "speedpowdershovel");
+		super.setUnlocalizedName("speedpowdershovel");
 		super.setCreativeTab(tabs);
 	}
 
