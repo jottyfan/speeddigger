@@ -10,11 +10,13 @@ import de.jottyfan.minecraft.speeddigger.items.SpeedpowderAxe;
 import de.jottyfan.minecraft.speeddigger.items.SpeedpowderPickaxe;
 import de.jottyfan.minecraft.speeddigger.items.SpeedpowderShovel;
 import de.jottyfan.minecraft.speeddigger.items.Sulphor;
+import de.jottyfan.minecraft.speeddigger.proxy.IProxy;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,7 +44,9 @@ public class SpeedDiggerItems {
 	public static final Sulphor ITEM_SULPHOR = new Sulphor(tabs);
 	public static final Salpeter ITEM_SALPETER = new Salpeter(tabs);
 
-	@SideOnly(Side.CLIENT)
+	@SidedProxy(clientSide = "de.jottyfan.minecraft.speeddigger.proxy.ClientProxy", serverSide = "de.jottyfan.minecraft.speeddigger.proxy.ServerProxy")
+	public static IProxy proxy;
+
 	@Mod.EventBusSubscriber(modid = SpeedDigger.MODID)
 	public static class RegistrationHandler {
 		public static final HashSet<Item> ITEMS = new HashSet<>();
@@ -57,8 +61,7 @@ public class SpeedDiggerItems {
 			for (final Item item : items) {
 				registry.register(item);
 
-				ModelLoader.setCustomModelResourceLocation(item, 0,
-						new ModelResourceLocation(item.getRegistryName(), "inventory"));
+				proxy.registerCustomModel(item, 0, item.getRegistryName());
 
 				ITEMS.add(item);
 			}
