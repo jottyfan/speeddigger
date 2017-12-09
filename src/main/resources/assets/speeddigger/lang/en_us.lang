@@ -7,6 +7,7 @@ item.speedpowdershovel.name=speedpowder shovel
 item.speedpowder.name=speedpowder
 item.sulphor.name=sulphor
 item.salpeter.name=salpeter
+item.field.name=field
 tile.orenethersulphor.name=nether sulphor
 tile.oresalpeter.name=salpeter ore
 tile.oresandsalpeter.name=salpeter stone

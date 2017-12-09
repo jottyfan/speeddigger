@@ -6,9 +6,10 @@
               "1.12.2.4": "sulphor and salpeter",
               "1.12.2.5": "balancing and finetuning",
               "1.12.2.6": "speedpowder",
-              "1.12.2.7": "server compatibility"
+              "1.12.2.7": "server compatibility",
+              "1.12.2.8": "field craft"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.7",
-	            "1.12.2-recommended": "1.12.2.7"
+	"promos": { "1.12.2-latest": "1.12.2.8",
+	            "1.12.2-recommended": "1.12.2.8"
 	          }
 }

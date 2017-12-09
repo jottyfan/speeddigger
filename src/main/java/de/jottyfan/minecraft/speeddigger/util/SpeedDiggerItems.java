@@ -1,6 +1,7 @@
 package de.jottyfan.minecraft.speeddigger.util;
 
 import de.jottyfan.minecraft.speeddigger.SpeedDigger;
+import de.jottyfan.minecraft.speeddigger.items.Field;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderAxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderPickaxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderShovel;
@@ -43,6 +44,7 @@ public class SpeedDiggerItems {
 	public static final Speedpowder ITEM_SPEEDPOWDER = new Speedpowder(tabs);
 	public static final Sulphor ITEM_SULPHOR = new Sulphor(tabs);
 	public static final Salpeter ITEM_SALPETER = new Salpeter(tabs);
+	public static final Field ITEM_FIELD = new Field(tabs);
 
 	@SidedProxy(clientSide = "de.jottyfan.minecraft.speeddigger.proxy.ClientProxy", serverSide = "de.jottyfan.minecraft.speeddigger.proxy.ServerProxy")
 	public static IProxy proxy;
@@ -54,7 +56,8 @@ public class SpeedDiggerItems {
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
 			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER, AXE_SPEEDPOWDER,
-					PICKAXE_SPEEDPOWDER, SHOVEL_SPEEDPOWDER, ITEM_SULPHOR, ITEM_SALPETER, ITEM_SPEEDPOWDER };
+					PICKAXE_SPEEDPOWDER, SHOVEL_SPEEDPOWDER, ITEM_SULPHOR, ITEM_SALPETER, ITEM_SPEEDPOWDER,
+					ITEM_FIELD };
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 
