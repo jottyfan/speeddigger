@@ -33,7 +33,7 @@ public class Field extends Item {
 		super.setUnlocalizedName("field");
 		super.setCreativeTab(tabs);
 	}
-	
+
 	public Item setFieldsize(Integer fieldsize) {
 		this.fieldsize = fieldsize;
 		return this;
@@ -47,12 +47,13 @@ public class Field extends Item {
 		List<BlockPos> positions = new ArrayList<>();
 		for (int x = pos.getX() - fieldsize; x <= pos.getX() + fieldsize; x++) {
 			for (int z = pos.getZ() - fieldsize; z <= pos.getZ() + fieldsize; z++) {
-				positions.add(new BlockPos(x,pos.getY(),z));
+				positions.add(new BlockPos(x, pos.getY(), z));
 			}
 		}
 		IBlockState plowedField = Blocks.FARMLAND.getDefaultState();
 		for (BlockPos p : positions) {
 			world.destroyBlock(p, true);
+			world.destroyBlock(p.up(), true);
 			world.setBlockState(p, plowedField);
 		}
 		world.setBlockState(pos, Blocks.WATER.getDefaultState());
