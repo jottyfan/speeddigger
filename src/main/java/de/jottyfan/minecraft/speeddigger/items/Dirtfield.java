@@ -22,15 +22,15 @@ import net.minecraft.world.World;
  * @author jotty
  *
  */
-public class Field extends Item {
+public class Dirtfield extends Item {
 
 	private Integer fieldsize;
 
-	public Field(CreativeTabs tabs) {
+	public Dirtfield(CreativeTabs tabs) {
 		super();
 		this.fieldsize = 4;
-		super.setRegistryName(SpeedDigger.MODID, "field");
-		super.setUnlocalizedName("field");
+		super.setRegistryName(SpeedDigger.MODID, "dirtfield");
+		super.setUnlocalizedName("dirtfield");
 		super.setCreativeTab(tabs);
 	}
 
@@ -56,7 +56,7 @@ public class Field extends Item {
 			world.destroyBlock(p.up(), true);
 			world.setBlockState(p, plowedField);
 		}
-		world.setBlockState(pos, Blocks.WATER.getDefaultState());
+		world.destroyBlock(pos, true);
 		player.setHeldItem(hand, new ItemStack(Items.AIR));
 		return super.onItemRightClick(world, player, hand);
 	}

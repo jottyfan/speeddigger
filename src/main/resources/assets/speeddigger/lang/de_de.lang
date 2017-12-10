@@ -8,6 +8,7 @@ item.speedpowder.name=Fluchtpulver
 item.sulphor.name=Schwefel
 item.salpeter.name=Salpeter
 item.field.name=Acker
+item.dirtfield.name=Ackerboden
 tile.orenethersulphor.name=Nether-Schwefel
 tile.oresalpeter.name=Salpetererz
 tile.oresandsalpeter.name=Salpetergestein

@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -56,16 +57,30 @@ public class SpeedDigger {
 		GameRegistry.addShapedRecipe(SpeedDiggerItems.SHOVEL_SPEEDPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.SHOVEL_SPEEDPOWDER), " # ", " | ", " | ", '#',
 				SpeedDiggerItems.ITEM_SPEEDPOWDER, '|', Items.STICK);
-		GameRegistry.addShapelessRecipe(Items.GUNPOWDER.getRegistryName(), null, new ItemStack(Items.GUNPOWDER),
+		GameRegistry.addShapelessRecipe(new ResourceLocation("speeddigger:gunpowder"), null, new ItemStack(Items.GUNPOWDER),
 				Ingredient.fromItem(SpeedDiggerItems.ITEM_SULPHOR), Ingredient.fromItem(SpeedDiggerItems.ITEM_SALPETER),
 				Ingredient.fromItem(Items.COAL));
 		GameRegistry.addShapelessRecipe(SpeedDiggerItems.ITEM_SPEEDPOWDER.getRegistryName(), null,
 				new ItemStack(SpeedDiggerItems.ITEM_SPEEDPOWDER, 1), Ingredient.fromItem(Items.GUNPOWDER),
 				Ingredient.fromItem(Items.REDSTONE));
-		GameRegistry.addShapelessRecipe(SpeedDiggerItems.ITEM_FIELD.getRegistryName(), null,
-				new ItemStack(SpeedDiggerItems.ITEM_FIELD),
-				Ingredient.fromItem(Item.getItemFromBlock(Blocks.DIRT)), Ingredient.fromItem(Items.WATER_BUCKET),
-				Ingredient.fromItem(Items.STONE_SHOVEL), Ingredient.fromItem(Items.STONE_HOE));
+		GameRegistry.addShapedRecipe(new ResourceLocation("speeddigger:dirtfieldFromWood"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_DIRTFIELD), "###", "#h#", "###", '#',
+				new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 10), 'h', Items.WOODEN_HOE);
+		GameRegistry.addShapedRecipe(new ResourceLocation("speeddigger:dirtfieldFromStone"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_DIRTFIELD), "###", "#h#", "###", '#',
+				new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 8), 'h', Items.STONE_HOE);
+		GameRegistry.addShapedRecipe(new ResourceLocation("speeddigger:dirtfieldFromIron"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_DIRTFIELD), "###", "#h#", "###", '#',
+				new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 4), 'h', Items.IRON_HOE);
+		GameRegistry.addShapedRecipe(new ResourceLocation("speeddigger:dirtfieldFromGold"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_DIRTFIELD), "###", "#h#", "###", '#',
+				new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 2), 'h', Items.GOLDEN_HOE);
+		GameRegistry.addShapedRecipe(new ResourceLocation("speeddigger:dirtfieldFromDiamond"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_DIRTFIELD), "###", "#h#", "###", '#',
+				new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1), 'h', Items.DIAMOND_HOE);
+		GameRegistry.addShapelessRecipe(new ResourceLocation("speeddigger:field"), null,
+				new ItemStack(SpeedDiggerItems.ITEM_FIELD), Ingredient.fromItem(SpeedDiggerItems.ITEM_DIRTFIELD),
+				Ingredient.fromItem(Items.WATER_BUCKET), Ingredient.fromItem(Items.WOODEN_SHOVEL));
 		MinecraftForge.EVENT_BUS.register(new BlockBreakEvent());
 		GameRegistry.registerWorldGenerator(new OreGenerator(), 0);
 	}
