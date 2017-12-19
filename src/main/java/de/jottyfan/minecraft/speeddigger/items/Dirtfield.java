@@ -57,7 +57,7 @@ public class Dirtfield extends Item {
 			world.setBlockState(p, plowedField);
 		}
 		world.destroyBlock(pos, true);
-		player.setHeldItem(hand, new ItemStack(Items.AIR));
+		player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 		return super.onItemRightClick(world, player, hand);
 	}
 }
