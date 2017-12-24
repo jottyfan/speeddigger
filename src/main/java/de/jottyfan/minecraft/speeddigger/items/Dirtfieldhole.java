@@ -22,21 +22,13 @@ import net.minecraft.world.World;
  * @author jotty
  *
  */
-public class Dirtfield extends Item {
+public class Dirtfieldhole extends Item {
 
-	private Integer fieldsize;
-
-	public Dirtfield(CreativeTabs tabs) {
+	public Dirtfieldhole(CreativeTabs tabs) {
 		super();
-		this.fieldsize = 4;
-		super.setRegistryName(SpeedDigger.MODID, "dirtfield");
-		super.setUnlocalizedName("dirtfield");
+		super.setRegistryName(SpeedDigger.MODID, "dirtfieldhole");
+		super.setUnlocalizedName("dirtfieldhole");
 		super.setCreativeTab(tabs);
-	}
-
-	public Item setFieldsize(Integer fieldsize) {
-		this.fieldsize = fieldsize;
-		return this;
 	}
 
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
@@ -45,18 +37,18 @@ public class Dirtfield extends Item {
 		world.destroyBlock(pos, true);
 		world.destroyBlock(pos.up(), true);
 		List<BlockPos> positions = new ArrayList<>();
-		for (int x = pos.getX() - fieldsize; x <= pos.getX() + fieldsize; x++) {
-			for (int z = pos.getZ() - fieldsize; z <= pos.getZ() + fieldsize; z++) {
+		for (int x = pos.getX() - 1; x <= pos.getX() + 1; x++) {
+			for (int z = pos.getZ() - 1; z <= pos.getZ() + 1; z++) {
 				positions.add(new BlockPos(x, pos.getY(), z));
 			}
 		}
-		IBlockState plowedField = Blocks.FARMLAND.getDefaultState();
+		IBlockState dirt = Blocks.DIRT.getDefaultState();
 		for (BlockPos p : positions) {
 			world.destroyBlock(p, true);
 			world.destroyBlock(p.up(), true);
-			world.setBlockState(p, plowedField);
+			world.setBlockState(p, dirt);
 		}
-		world.destroyBlock(pos, true);
+		world.setBlockState(pos, Blocks.AIR.getBlockState().getBaseState());
 		player.getHeldItem(hand).setCount(player.getHeldItem(hand).getCount() - 1);
 		return super.onItemRightClick(world, player, hand);
 	}

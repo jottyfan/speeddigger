@@ -20,7 +20,7 @@ import net.minecraft.item.ItemTool;
 public class GunpowderShovel extends ItemTool implements RangeableTool {
 
 	private static final Set<Block> EFFECTIVE_ON = Sets
-			.newHashSet(new Block[] { Blocks.GRAVEL, Blocks.SAND, Blocks.GRASS, Blocks.DIRT, Blocks.CLAY });
+			.newHashSet(new Block[] { Blocks.GRAVEL, Blocks.SAND, Blocks.GRASS, Blocks.DIRT, Blocks.CLAY, Blocks.FARMLAND });
 
 	public Integer range;
 

@@ -2,6 +2,8 @@ package de.jottyfan.minecraft.speeddigger.util;
 
 import de.jottyfan.minecraft.speeddigger.SpeedDigger;
 import de.jottyfan.minecraft.speeddigger.items.Dirtfield;
+import de.jottyfan.minecraft.speeddigger.items.Dirtfieldhole;
+import de.jottyfan.minecraft.speeddigger.items.Dirtfieldpuzzle;
 import de.jottyfan.minecraft.speeddigger.items.Field;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderAxe;
 import de.jottyfan.minecraft.speeddigger.items.GunpowderPickaxe;
@@ -47,6 +49,8 @@ public class SpeedDiggerItems {
 	public static final Salpeter ITEM_SALPETER = new Salpeter(tabs);
 	public static final Field ITEM_FIELD = new Field(tabs);
 	public static final Dirtfield ITEM_DIRTFIELD = new Dirtfield(tabs);
+	public static final Dirtfieldhole ITEM_DIRTFIELDHOLE = new Dirtfieldhole(tabs);
+	public static final Dirtfieldpuzzle ITEM_DIRTFIELDPUZZLE = new Dirtfieldpuzzle(tabs);
 
 	@SidedProxy(clientSide = "de.jottyfan.minecraft.speeddigger.proxy.ClientProxy", serverSide = "de.jottyfan.minecraft.speeddigger.proxy.ServerProxy")
 	public static IProxy proxy;
@@ -59,7 +63,7 @@ public class SpeedDiggerItems {
 		public static void registerItems(final RegistryEvent.Register<Item> event) {
 			final Item[] items = { AXE_GUNPOWDER, PICKAXE_GUNPOWDER, SHOVEL_GUNPOWDER, AXE_SPEEDPOWDER,
 					PICKAXE_SPEEDPOWDER, SHOVEL_SPEEDPOWDER, ITEM_SULPHOR, ITEM_SALPETER, ITEM_SPEEDPOWDER,
-					ITEM_FIELD, ITEM_DIRTFIELD };
+					ITEM_FIELD, ITEM_DIRTFIELD, ITEM_DIRTFIELDHOLE, ITEM_DIRTFIELDPUZZLE };
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 
