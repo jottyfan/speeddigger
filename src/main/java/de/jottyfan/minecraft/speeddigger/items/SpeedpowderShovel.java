@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
 /**
@@ -19,8 +20,8 @@ import net.minecraft.item.ItemTool;
  */
 public class SpeedpowderShovel extends ItemTool implements RangeableTool {
 
-	private static final Set<Block> EFFECTIVE_ON = Sets
-			.newHashSet(new Block[] { Blocks.GRAVEL, Blocks.SAND, Blocks.GRASS, Blocks.DIRT, Blocks.CLAY, Blocks.FARMLAND });
+	private static final Set<Block> EFFECTIVE_ON = Sets.newHashSet(
+			new Block[] { Blocks.GRAVEL, Blocks.SAND, Blocks.GRASS, Blocks.DIRT, Blocks.CLAY, Blocks.FARMLAND });
 
 	public Integer range;
 
@@ -32,6 +33,12 @@ public class SpeedpowderShovel extends ItemTool implements RangeableTool {
 		super.setRegistryName(SpeedDigger.MODID, "speedpowdershovel");
 		super.setUnlocalizedName("speedpowdershovel");
 		super.setCreativeTab(tabs);
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		return BIOMESOPLENTY_SHOVEL.contains(state.getBlock().getUnlocalizedName()) ? this.efficiency
+				: super.getDestroySpeed(stack, state);
 	}
 
 	@Override

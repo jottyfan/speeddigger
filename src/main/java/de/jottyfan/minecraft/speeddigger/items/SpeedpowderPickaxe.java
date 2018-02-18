@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
 /**
@@ -29,6 +30,12 @@ public class SpeedpowderPickaxe extends ItemPickaxe implements RangeableTool {
 		super.setRegistryName(SpeedDigger.MODID, "speedpowderpickaxe");
 		super.setUnlocalizedName("speedpowderpickaxe");
 		super.setCreativeTab(tabs);
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		return BIOMESOPLENTY_PICKAXE.contains(state.getBlock().getUnlocalizedName()) ? this.efficiency
+				: super.getDestroySpeed(stack, state);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 
 /**
@@ -32,6 +33,12 @@ public class SpeedpowderAxe extends ItemTool implements RangeableTool {
 		super.setRegistryName(SpeedDigger.MODID, "speedpowderaxe");
 		super.setUnlocalizedName("speedpowderaxe");
 		super.setCreativeTab(tabs);
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		return BIOMESOPLENTY_AXE.contains(state.getBlock().getUnlocalizedName()) ? this.efficiency
+				: super.getDestroySpeed(stack, state);
 	}
 
 	@Override
