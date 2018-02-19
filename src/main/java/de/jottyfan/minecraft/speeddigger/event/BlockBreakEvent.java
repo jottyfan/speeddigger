@@ -5,13 +5,17 @@ import java.util.List;
 
 import de.jottyfan.minecraft.speeddigger.items.RangeableTool;
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerItems;
+import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,26 +33,25 @@ public class BlockBreakEvent {
 
 	@SubscribeEvent
 	public void doBreakBlock(BlockEvent.BreakEvent event) {
-		if (event.getPlayer().getHeldItemMainhand() != null) {
-			Item item = event.getPlayer().getHeldItemMainhand().getItem();
+		EntityPlayer player = event.getPlayer();
+		if (player.getHeldItemMainhand() != null) {
+			Item item = player.getHeldItemMainhand().getItem();
 			World world = event.getWorld();
 			IBlockState blockState = world.getBlockState(event.getPos());
 			Block block = blockState.getBlock();
 			List<String> visitedBlocks = new ArrayList<>();
+			RangeableTool tool = (RangeableTool) item;
 			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item) || SpeedDiggerItems.AXE_SPEEDPOWDER.equals(item)) {
-				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.UPWARDS);
+						BlockBreakDirection.UPWARDS, player);
 			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)
 					|| SpeedDiggerItems.PICKAXE_SPEEDPOWDER.equals(item)) {
-				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.ALL);
+						BlockBreakDirection.ALL, player);
 			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)
 					|| SpeedDiggerItems.SHOVEL_SPEEDPOWDER.equals(item)) {
-				RangeableTool tool = (RangeableTool) item;
 				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.ALL);
+						BlockBreakDirection.ALL, player);
 			}
 		}
 	}
@@ -65,9 +68,10 @@ public class BlockBreakEvent {
 	 *            to drop block; if null, no limit is given but the border of non
 	 *            equal blocks
 	 * @param blockBreakDirection
+	 * @param player
 	 */
-	private void breakBlockRecursive(List<String> visitedBlocks, World world, Block block, BlockPos pos, RangeableTool tool, Integer radius,
-			BlockBreakDirection blockBreakDirection) {
+	private void breakBlockRecursive(List<String> visitedBlocks, World world, Block block, BlockPos pos,
+			RangeableTool tool, Integer radius, BlockBreakDirection blockBreakDirection, EntityPlayer player) {
 		if (visitedBlocks.contains(pos.toString())) {
 			return; // reduce loops
 		} else {
@@ -87,26 +91,29 @@ public class BlockBreakEvent {
 				}
 				if (radius == null || radius > 1) {
 					Integer nextRadius = radius == null ? null : radius - 1;
-					breakBlockRecursive(visitedBlocks, world, block, pos.north(), tool, nextRadius,
-							blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.north(), tool, nextRadius, blockBreakDirection,
+							player);
 					breakBlockRecursive(visitedBlocks, world, block, pos.north().east(), tool, nextRadius,
-							blockBreakDirection);
+							blockBreakDirection, player);
 					breakBlockRecursive(visitedBlocks, world, block, pos.north().west(), tool, nextRadius,
-							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south(), tool, nextRadius,
-							blockBreakDirection);
+							blockBreakDirection, player);
+					breakBlockRecursive(visitedBlocks, world, block, pos.south(), tool, nextRadius, blockBreakDirection,
+							player);
 					breakBlockRecursive(visitedBlocks, world, block, pos.south().east(), tool, nextRadius,
-							blockBreakDirection);
+							blockBreakDirection, player);
 					breakBlockRecursive(visitedBlocks, world, block, pos.south().west(), tool, nextRadius,
-							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.east(), tool, nextRadius, blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.west(), tool, nextRadius, blockBreakDirection);
+							blockBreakDirection, player);
+					breakBlockRecursive(visitedBlocks, world, block, pos.east(), tool, nextRadius, blockBreakDirection,
+							player);
+					breakBlockRecursive(visitedBlocks, world, block, pos.west(), tool, nextRadius, blockBreakDirection,
+							player);
 
-					breakBlockRecursive(visitedBlocks, world, block, pos.up(), tool, nextRadius, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.up(), tool, nextRadius, blockBreakDirection,
+							player);
 
 					if (BlockBreakDirection.ALL.equals(blockBreakDirection)) {
 						breakBlockRecursive(visitedBlocks, world, block, pos.down(), tool, nextRadius,
-								blockBreakDirection);
+								blockBreakDirection, player);
 					}
 				}
 			}

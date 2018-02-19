@@ -14,8 +14,7 @@ import net.minecraft.block.state.IBlockState;
 public interface RangeableTool {
 
 	public static final Set<String> BIOMESOPLENTY_SHOVEL = Sets
-			.newHashSet(new String[] { "tile.flesh", "tile.loamy_dirt", "tile.loamy_grass_block", "tile.mud",
-					"tile.origin_grass_block", "tile.sandy_dirt", "tile.silty_dirt", "tile.white_sand" });
+			.newHashSet(new String[] { "tile.flesh", "tile.dirt", "tile.grass", "tile.mud", "tile.white_sand" });
 
 	public static final Set<String> BIOMESOPLENTY_PICKAXE = Sets.newHashSet(new String[] { "tile.dried_sand" });
 
