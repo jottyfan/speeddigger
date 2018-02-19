@@ -47,8 +47,7 @@ public class GunpowderAxe extends ItemTool implements RangeableTool {
 	}
 
 	@Override
-	public boolean canHarvestBlock(IBlockState blockIn) {
-		// second one is for biomesoplenty
+	public boolean canBreakNeigbbors(IBlockState blockIn) {
 		return EFFECTIVE_RECURSIVE_ON.contains(blockIn.getBlock())
 				|| BIOMESOPLENTY_AXE.contains(blockIn.getBlock().getUnlocalizedName());
 	}

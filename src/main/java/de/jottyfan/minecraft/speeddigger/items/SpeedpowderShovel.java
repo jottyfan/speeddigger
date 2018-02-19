@@ -42,13 +42,13 @@ public class SpeedpowderShovel extends ItemTool implements RangeableTool {
 	}
 
 	@Override
-	public boolean canHarvestBlock(IBlockState blockIn) {
-		return EFFECTIVE_ON.contains(blockIn.getBlock())
-				|| BIOMESOPLENTY_SHOVEL.contains(blockIn.getBlock().getUnlocalizedName());
+	public Integer getRange() {
+		return range;
 	}
 
 	@Override
-	public Integer getRange() {
-		return range;
+	public boolean canBreakNeigbbors(IBlockState blockIn) {
+		return EFFECTIVE_ON.contains(blockIn.getBlock())
+				|| BIOMESOPLENTY_SHOVEL.contains(blockIn.getBlock().getUnlocalizedName());
 	}
 }

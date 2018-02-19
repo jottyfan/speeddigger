@@ -39,13 +39,13 @@ public class SpeedpowderPickaxe extends ItemPickaxe implements RangeableTool {
 	}
 
 	@Override
-	public boolean canHarvestBlock(IBlockState blockIn) {
-		return super.canHarvestBlock(blockIn)
-				|| BIOMESOPLENTY_PICKAXE.contains(blockIn.getBlock().getUnlocalizedName());
+	public Integer getRange() {
+		return range;
 	}
 
 	@Override
-	public Integer getRange() {
-		return range;
+	public boolean canBreakNeigbbors(IBlockState blockIn) {
+		return super.canHarvestBlock(blockIn)
+				|| BIOMESOPLENTY_PICKAXE.contains(blockIn.getBlock().getUnlocalizedName());
 	}
 }

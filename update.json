@@ -8,9 +8,10 @@
               "1.12.2.6": "speedpowder",
               "1.12.2.7": "server compatibility",
               "1.12.2.8": "field craft",
-              "1.12.2.9": "field optimization"
+              "1.12.2.9": "field optimization",
+              "1.12.2.10": "biopesoplenty shovel extension"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.9",
-	            "1.12.2-recommended": "1.12.2.9"
+	"promos": { "1.12.2-latest": "1.12.2.10",
+	            "1.12.2-recommended": "1.12.2.10"
 	          }
 }

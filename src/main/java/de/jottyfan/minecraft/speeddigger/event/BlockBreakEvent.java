@@ -37,17 +37,17 @@ public class BlockBreakEvent {
 			List<String> visitedBlocks = new ArrayList<>();
 			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item) || SpeedDiggerItems.AXE_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
 						BlockBreakDirection.UPWARDS);
 			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)
 					|| SpeedDiggerItems.PICKAXE_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
 						BlockBreakDirection.ALL);
 			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)
 					|| SpeedDiggerItems.SHOVEL_SPEEDPOWDER.equals(item)) {
 				RangeableTool tool = (RangeableTool) item;
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), item, tool.getRange(),
+				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
 						BlockBreakDirection.ALL);
 			}
 		}
@@ -59,15 +59,15 @@ public class BlockBreakEvent {
 	 * @param visitedBlocks
 	 * @param world
 	 * @param block
-	 * @param item
+	 * @param tool
 	 * @param pos
 	 * @param radius
 	 *            to drop block; if null, no limit is given but the border of non
 	 *            equal blocks
 	 * @param blockBreakDirection
 	 */
-	private void breakBlockRecursive(List<String> visitedBlocks, World world, Block block, BlockPos pos, Item item,
-			Integer radius, BlockBreakDirection blockBreakDirection) {
+	private void breakBlockRecursive(List<String> visitedBlocks, World world, Block block, BlockPos pos, RangeableTool tool, Integer radius,
+			BlockBreakDirection blockBreakDirection) {
 		if (visitedBlocks.contains(pos.toString())) {
 			return; // reduce loops
 		} else {
@@ -75,7 +75,7 @@ public class BlockBreakEvent {
 		}
 		// remove block from world
 		IBlockState blockState = world.getBlockState(pos);
-		if (blockState != null && item.canHarvestBlock(blockState)) {
+		if (tool.canBreakNeigbbors(blockState)) {
 			NonNullList<ItemStack> list = NonNullList.create();
 			Block currentBlock = blockState.getBlock();
 			if (block.equals(currentBlock)) {
@@ -87,25 +87,25 @@ public class BlockBreakEvent {
 				}
 				if (radius == null || radius > 1) {
 					Integer nextRadius = radius == null ? null : radius - 1;
-					breakBlockRecursive(visitedBlocks, world, block, pos.north(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.north(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.north().east(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.north().east(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.north().west(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.north().west(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south().east(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south().east(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.south().west(), item, nextRadius,
+					breakBlockRecursive(visitedBlocks, world, block, pos.south().west(), tool, nextRadius,
 							blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.east(), item, nextRadius, blockBreakDirection);
-					breakBlockRecursive(visitedBlocks, world, block, pos.west(), item, nextRadius, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.east(), tool, nextRadius, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.west(), tool, nextRadius, blockBreakDirection);
 
-					breakBlockRecursive(visitedBlocks, world, block, pos.up(), item, nextRadius, blockBreakDirection);
+					breakBlockRecursive(visitedBlocks, world, block, pos.up(), tool, nextRadius, blockBreakDirection);
 
 					if (BlockBreakDirection.ALL.equals(blockBreakDirection)) {
-						breakBlockRecursive(visitedBlocks, world, block, pos.down(), item, nextRadius,
+						breakBlockRecursive(visitedBlocks, world, block, pos.down(), tool, nextRadius,
 								blockBreakDirection);
 					}
 				}
