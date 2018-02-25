@@ -34,25 +34,45 @@ public class BlockBreakEvent {
 	@SubscribeEvent
 	public void doBreakBlock(BlockEvent.BreakEvent event) {
 		EntityPlayer player = event.getPlayer();
-		if (player.getHeldItemMainhand() != null) {
-			Item item = player.getHeldItemMainhand().getItem();
-			World world = event.getWorld();
-			IBlockState blockState = world.getBlockState(event.getPos());
-			Block block = blockState.getBlock();
-			List<String> visitedBlocks = new ArrayList<>();
-			RangeableTool tool = (RangeableTool) item;
-			if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item) || SpeedDiggerItems.AXE_SPEEDPOWDER.equals(item)) {
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.UPWARDS, player);
-			} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)
-					|| SpeedDiggerItems.PICKAXE_SPEEDPOWDER.equals(item)) {
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.ALL, player);
-			} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item)
-					|| SpeedDiggerItems.SHOVEL_SPEEDPOWDER.equals(item)) {
-				breakBlockRecursive(visitedBlocks, world, block, event.getPos(), tool, tool.getRange(),
-						BlockBreakDirection.ALL, player);
+		ItemStack mainHand = player.getHeldItemMainhand();
+		if (mainHand != null) {
+			Item item = mainHand.getItem();
+			if (item instanceof RangeableTool) {
+				BlockPos pos = event.getPos();
+				World world = event.getWorld();
+				IBlockState blockState = world.getBlockState(pos);
+				Block block = blockState.getBlock();
+				handleRangeableTools(item, world, block, pos, player);
 			}
+		}
+	}
+
+	/**
+	 * hande the rangeable tools break event
+	 * 
+	 * @param item
+	 *            the item that has been used
+	 * @param world
+	 *            the world
+	 * @param block
+	 *            the current block
+	 * @param pos
+	 *            the position of the current block
+	 * @param player
+	 *            the current player
+	 */
+	private void handleRangeableTools(Item item, World world, Block block, BlockPos pos, EntityPlayer player) {
+		RangeableTool tool = (RangeableTool) item;
+		if (SpeedDiggerItems.AXE_GUNPOWDER.equals(item) || SpeedDiggerItems.AXE_SPEEDPOWDER.equals(item)) {
+			breakBlockRecursive(new ArrayList<>(), world, block, pos, tool, tool.getRange(),
+					BlockBreakDirection.UPWARDS, player);
+		} else if (SpeedDiggerItems.PICKAXE_GUNPOWDER.equals(item)
+				|| SpeedDiggerItems.PICKAXE_SPEEDPOWDER.equals(item)) {
+			breakBlockRecursive(new ArrayList<>(), world, block, pos, tool, tool.getRange(), BlockBreakDirection.ALL,
+					player);
+		} else if (SpeedDiggerItems.SHOVEL_GUNPOWDER.equals(item) || SpeedDiggerItems.SHOVEL_SPEEDPOWDER.equals(item)) {
+			breakBlockRecursive(new ArrayList<>(), world, block, pos, tool, tool.getRange(), BlockBreakDirection.ALL,
+					player);
 		}
 	}
 

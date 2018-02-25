@@ -9,9 +9,10 @@
               "1.12.2.7": "server compatibility",
               "1.12.2.8": "field craft",
               "1.12.2.9": "field optimization",
-              "1.12.2.10": "biopesoplenty shovel extension"
+              "1.12.2.10": "biopesoplenty shovel extension",
+              "1.12.2.11": "blockbreak bugfix"
 	          },
-	"promos": { "1.12.2-latest": "1.12.2.10",
-	            "1.12.2-recommended": "1.12.2.10"
+	"promos": { "1.12.2-latest": "1.12.2.11",
+	            "1.12.2-recommended": "1.12.2.11"
 	          }
 }
