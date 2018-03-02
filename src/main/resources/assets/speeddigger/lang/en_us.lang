@@ -15,4 +15,6 @@ tile.orenethersulphor.name=nether sulphor
 tile.oresalpeter.name=salpeter ore
 tile.oresandsalpeter.name=salpeter stone
 tile.oresulphor.name=sulphor stone
+tile.dirtsalpeter.name=salpeter dirt
+tile.sandsalpeter.name=salpeter sand
 itemGroup.speeddigger=Speed Digger

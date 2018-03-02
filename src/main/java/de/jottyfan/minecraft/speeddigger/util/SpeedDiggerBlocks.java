@@ -1,10 +1,12 @@
 package de.jottyfan.minecraft.speeddigger.util;
 
 import de.jottyfan.minecraft.speeddigger.SpeedDigger;
+import de.jottyfan.minecraft.speeddigger.blocks.DirtSalpeter;
 import de.jottyfan.minecraft.speeddigger.blocks.OreNetherSulphor;
 import de.jottyfan.minecraft.speeddigger.blocks.OreSalpeter;
 import de.jottyfan.minecraft.speeddigger.blocks.OreSandSalpeter;
 import de.jottyfan.minecraft.speeddigger.blocks.OreSulphor;
+import de.jottyfan.minecraft.speeddigger.blocks.SandSalpeter;
 import de.jottyfan.minecraft.speeddigger.proxy.IProxy;
 import de.jottyfan.minecraft.speeddigger.proxy.ServerProxy;
 import net.minecraft.block.Block;
@@ -36,6 +38,8 @@ public class SpeedDiggerBlocks {
 	public static final OreNetherSulphor ORE_NETHER_SULPHOR = new OreNetherSulphor(tabs);
 	public static final OreSalpeter ORE_SALPETER = new OreSalpeter(tabs);
 	public static final OreSandSalpeter ORE_SAND_SALPETER = new OreSandSalpeter(tabs);
+	public static final DirtSalpeter DIRT_SALPETER = new DirtSalpeter(tabs);
+	public static final SandSalpeter SAND_SALPETER = new SandSalpeter(tabs);
 
 	@SidedProxy(clientSide = "de.jottyfan.minecraft.speeddigger.proxy.ClientProxy", serverSide = "de.jottyfan.minecraft.speeddigger.proxy.ServerProxy")
 	public static IProxy proxy;
@@ -46,7 +50,7 @@ public class SpeedDiggerBlocks {
 
 		@SubscribeEvent
 		public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-			final Block[] blocks = { ORE_SULPHOR, ORE_NETHER_SULPHOR, ORE_SALPETER, ORE_SAND_SALPETER };
+			final Block[] blocks = { ORE_SULPHOR, ORE_NETHER_SULPHOR, ORE_SALPETER, ORE_SAND_SALPETER, DIRT_SALPETER, SAND_SALPETER };
 
 			final IForgeRegistry<Block> registry = event.getRegistry();
 

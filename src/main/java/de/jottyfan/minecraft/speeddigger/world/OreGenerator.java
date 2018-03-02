@@ -6,11 +6,14 @@ import java.util.Set;
 
 import de.jottyfan.minecraft.speeddigger.util.SpeedDiggerBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 /**
@@ -19,18 +22,23 @@ import net.minecraftforge.fml.common.IWorldGenerator;
  *
  */
 public class OreGenerator implements IWorldGenerator {
+
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
+
+		int posX = chunkX * 16;
+		int posZ = chunkZ * 16;
+
 		Integer dimension = world.provider.getDimension();
 		if (dimension == 0) { // overworld
-			generateOverworldOres(world, random, chunkX, chunkZ, chunkGenerator, chunkProvider);
+			generateOverworldOres(world, random, posX, posZ, chunkGenerator, chunkProvider);
 		} else if (dimension == 1) { // the end
 			// no ore generation now
 		} else if (dimension == -1) { // nether
-			generateNetherOres(world, random, chunkX, chunkZ, chunkGenerator, chunkProvider);
+			generateNetherOres(world, random, posX, posZ, chunkGenerator, chunkProvider);
 		} else { // other mods
-			generateOverworldOres(world, random, chunkX, chunkZ, chunkGenerator, chunkProvider);
+			generateOverworldOres(world, random, posX, posZ, chunkGenerator, chunkProvider);
 		}
 	}
 
@@ -39,15 +47,14 @@ public class OreGenerator implements IWorldGenerator {
 	 * 
 	 * @param world
 	 * @param random
-	 * @param chunkX
-	 * @param chunkZ
+	 * @param posX
+	 * @param posZ
 	 * @param chunkGenerator
 	 * @param chunkProvider
 	 */
-	private void generateNetherOres(World world, Random random, int chunkX, int chunkZ, IChunkGenerator chunkGenerator,
+	private void generateNetherOres(World world, Random random, int posX, int posZ, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, chunkX, chunkZ, 3, 3, 18, 20, 5, 250,
-				Blocks.NETHERRACK);
+		addOreSpawn(SpeedDiggerBlocks.ORE_NETHER_SULPHOR, world, random, posX, posZ, 18, 20, 5, 250, Blocks.NETHERRACK);
 	}
 
 	/**
@@ -55,20 +62,22 @@ public class OreGenerator implements IWorldGenerator {
 	 * 
 	 * @param world
 	 * @param random
-	 * @param chunkX
-	 * @param chunkZ
+	 * @param posX
+	 * @param posZ
 	 * @param chunkGenerator
 	 * @param chunkProvider
 	 */
-	private void generateOverworldOres(World world, Random random, int chunkX, int chunkZ,
-			IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.LAVA);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.STONE,
+	private void generateOverworldOres(World world, Random random, int posX, int posZ, IChunkGenerator chunkGenerator,
+			IChunkProvider chunkProvider) {
+		addOreSpawn(SpeedDiggerBlocks.DIRT_SALPETER, world, random, posX, posZ, 3, 2, 48, 128, Blocks.DIRT);
+		addOreSpawn(SpeedDiggerBlocks.SAND_SALPETER, world, random, posX, posZ, 8, 4, 48, 128, Blocks.SAND);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, posX, posZ, 5, 5, 5, 250, Blocks.LAVA);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SULPHOR, world, random, posX, posZ, 5, 5, 5, 250, Blocks.STONE,
 				Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250, Blocks.STONE,
+		addOreSpawn(SpeedDiggerBlocks.ORE_SALPETER, world, random, posX, posZ, 5, 5, 5, 250, Blocks.STONE,
 				Blocks.COBBLESTONE, Blocks.CONCRETE, Blocks.GRAVEL);
-		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, chunkX, chunkZ, 5, 5, 5, 20, 5, 250,
-				Blocks.SANDSTONE, Blocks.SAND);
+		addOreSpawn(SpeedDiggerBlocks.ORE_SAND_SALPETER, world, random, posX, posZ, 5, 20, 5, 250, Blocks.SANDSTONE,
+				Blocks.SAND);
 	}
 
 	/**
@@ -77,40 +86,45 @@ public class OreGenerator implements IWorldGenerator {
 	 * @param ore
 	 * @param world
 	 * @param random
-	 * @param blockXPos
-	 * @param blockZPos
-	 * @param sizeX
-	 * @param siteZ
+	 * @param posX
+	 * @param posZ
 	 * @param maxVeinSize
-	 * @param chance
+	 * @param count
 	 * @param minY
 	 * @param maxY
 	 * @param blocksToSpawnIn
 	 */
-	private void addOreSpawn(Block ore, World world, Random random, int blockXPos, int blockZPos, int sizeX, int sizeZ,
-			int maxVeinSize, int count, int minY, int maxY, Block... blocksToSpawnIn) {
+	private void addOreSpawn(Block ore, World world, Random random, int posX, int posZ, int maxVeinSize, int count,
+			int minY, int maxY, Block... blocksToSpawnIn) {
 		Set<String> blockNames = new HashSet<>();
 		for (Block block : blocksToSpawnIn) {
 			blockNames.add(block.getUnlocalizedName());
 		}
-		int posY = maxY;
-		for (int j = 0; j < count; j++) {
-			for (int i = maxVeinSize; i > 0; i--) {
-				int posX = blockXPos + random.nextInt(sizeX);
-				int posZ = blockZPos + random.nextInt(sizeZ);
-				BlockPos pos = new BlockPos(posX, posY, posZ);
-				String oldBlockName = world.getBlockState(pos).getBlock().getUnlocalizedName();
-				while (!blockNames.contains(oldBlockName) && pos.getY() > minY) {
-					pos = pos.down();
-					oldBlockName = world.getBlockState(pos).getBlock().getUnlocalizedName();
+		WorldGenMinable generator = new WorldGenMinable(ore.getBlockState().getBaseState(), maxVeinSize);
+		for (int i = 0; i < count; i++) {
+			BlockPos pos = new BlockPos(posX + random.nextInt(16), minY + random.nextInt(maxY - minY),
+					posZ + random.nextInt(16));
+			String oldBlockName = world.getBlockState(pos).getBlock().getUnlocalizedName();
+			if (blockNames.contains(oldBlockName)) {
+				for (int j = 0; j < maxVeinSize; j++) {
+					Integer r = random.nextInt(3);
+					switch (r) {
+					case 0:
+						pos = pos.west();
+						break;
+					case 1:
+						pos = pos.north();
+						break;
+					case 2:
+						pos = pos.east();
+						break;
+					case 3:
+						pos = pos.south();
+						break;
+					}
+					world.setBlockState(pos, ore.getDefaultState(), 2);
 				}
-				if (pos.getY() < minY) {
-					break; // no more position found, aborting to reduce calculation time
-				}
-				world.setBlockState(pos, ore.getDefaultState(), 2);
-				posY = pos.down().getY();
 			}
-
 		}
 	}
 }

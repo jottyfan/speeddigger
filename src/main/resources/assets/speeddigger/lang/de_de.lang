@@ -15,4 +15,6 @@ tile.orenethersulphor.name=Nether-Schwefel
 tile.oresalpeter.name=Salpetererz
 tile.oresandsalpeter.name=Salpetergestein
 tile.oresulphor.name=Schwefelgestein
+tile.dirtsalpeter.name=Salpetererde
+tile.sandsalpeter.name=Salpetersand
 itemGroup.speeddigger=Speed Digger
